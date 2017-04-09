@@ -1,0 +1,112 @@
+body {
+    width: 100%;
+    min-width: 320px;
+    max-width: 750px;
+    background-color: rgb(249,249,249);
+    margin: 0 auto;
+}
+
+.header-div {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #DE2327;
+    text-align: center;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+.back-href, .back-href:hover, back-href:focus {
+   color: #FFF;
+   padding-left: 7px;
+}
+
+.list-div {
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.list-left-label {
+    width: 24%;
+    text-align: right;
+    height: 30px;
+    line-height: 30px;
+    padding-right: 2%;
+    margin-bottom: 0px;
+}
+
+.list-left-label span {
+    color: rgb(255,0,0);
+    margin-right: 5px;
+}
+
+.list-right-div {
+    width: 70%; 
+}
+
+.check-box {
+    height: 30px;
+    line-height: 30px;
+}
+
+.red {
+    color: rgb(255,0,0);
+}
+
+.pic-label {
+    width:45%;display:inline-block;padding:5px;margin-top:10px;border:1px solid #ccc;
+}
+
+.addon-span {
+    background-color: #FFF;
+}
+
+.num-input {
+    text-align: center;
+}
+
+.buy-input {
+    width: 90%;
+    height: 30px;
+    line-height: 30px;
+    padding: 0px 10px;
+    font-size: 12px;
+}
+
+.money-input {
+    width: 80px;
+    margin-right: 8px;
+    font: bold 16px/normal Arial;
+    color: rgb(102,102,102);
+    text-align: center;
+}
+
+.info-div {
+    max-width: 90%;
+    color: rgb(255, 0, 0);
+}
+
+.add-textared {
+    width: 90%;
+    max-width: 90%;
+}
+
+.submit-btn {
+    width: 60%;
+    height: 40px;
+    background-color: #00CC33;
+    color: rgb(255,255,255);
+    margin-left: 20%;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.submit-btn:focus, .submit-btn:hover {
+    color: rgb(255,255,255);
+}
+
+.fahuo p {
+    padding: 0px 12px;
+    font-size: 12px;
+}

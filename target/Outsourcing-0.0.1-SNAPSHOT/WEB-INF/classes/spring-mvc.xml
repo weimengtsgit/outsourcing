@@ -1,0 +1,76 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+
+
+    <mvc:annotation-driven />
+    <!-- 开启controller注解支持 -->
+    <context:component-scan base-package="com.company.controller">
+    </context:component-scan>
+    
+
+    <!-- 当在web.xml 中 DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
+    <mvc:default-servlet-handler />
+
+    <!-- 静态资源映射 --> <!-- 图片这类就不会被spring mvc拦截 -->
+     <mvc:resources mapping="/bootstrap/**" location="/view/bootstrap/" />
+    <mvc:resources mapping="/bootstrap-treeview/**" location="/view/bootstrap-treeview/" />
+    <mvc:resources mapping="/css/**" location="/view/css/" />
+    <mvc:resources mapping="/datatables/**" location="/view/datatables/" />
+    <mvc:resources mapping="/img/**" location="/view/img/" />
+    <mvc:resources mapping="/jquery/**" location="/view/jquery/" />
+    <mvc:resources mapping="/js/**" location="/view/js/" />
+    <mvc:resources mapping="/pages/**" location="/view/pages/" />
+    <mvc:resources mapping="/admin.html" location="/view/" />
+    <mvc:resources mapping="/buy.html" location="/view/" />
+    <mvc:resources mapping="/index.html" location="/view/" />
+
+
+    <!-- 默认的视图解析器 在上边的解析错误时使用 (默认使用html)- -->
+    <bean id="defaultViewResolver"
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+        p:order="1">
+        <property name="viewClass"
+            value="org.springframework.web.servlet.view.JstlView" />
+        <property name="requestContextAttribute" value="request" />
+        <property name="prefix" value="/view/" />
+        <property name="suffix" value=".html" />
+    </bean>
+
+    <!-- 控制器异常处理 -->
+    <bean id="exceptionHandlerExceptionResolver"
+        class="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver">
+    </bean>
+
+    <!-- <import resource="spring-mvc-shiro.xml" /> -->
+
+    <!-- <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" 
+        p:defaultEncoding="UTF-8"> <property name="maxUploadSize"> <value>10485760</value> 
+        </property> </bean> -->
+
+    <!-- Spring MVC JSON配置 -->
+    <bean
+        class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="mappingJacksonHttpMessageConverter" />
+            </list>
+        </property>
+    </bean>
+    <bean id="mappingJacksonHttpMessageConverter"
+        class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+        <property name="supportedMediaTypes">
+            <list>
+                <value>text/html;charset=UTF-8</value>
+            </list>
+        </property>
+    </bean>
+</beans>

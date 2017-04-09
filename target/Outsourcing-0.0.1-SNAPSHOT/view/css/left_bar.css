@@ -1,0 +1,32 @@
+.left-bar {
+    height: 100%; width: 210px; position: fixed; background: #2a3542; position: fixed; z-index: 100;
+}
+
+.sidebar-menu {
+    margin-top: 75px; padding: 0px;
+}
+
+#sidebar ul li {
+    position: relative;
+}
+
+ul.sidebar-menu li {
+    margin-bottom: 5px; margin-left: 10px; margin-right: 10px; line-height: 20px;
+}
+
+ul.sidebar-menu li a {
+    color: #aeb2b7; text-decoration: none; display: block; padding: 15px 0 15px 10px; outline: none;
+}
+
+ul.sidebar-menu li a.active,ul.sidebar-menu li a:hover,ul.sidebar-menu li a:focus {
+    background: #35404d; color: #fff; display: block; border-radius: 4px; -webkit-border-radius: 4px; -webkit-transition: all 0.3s ease; -moz-transition: all 0.3s ease; -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease; transition: all 0.3s ease;
+}
+
+ul.sidebar-menu li a.active i {
+    color: #FF6C60;
+}
+
+ul.sidebar-menu li a i {
+    font-size: 15px; padding-right: 6px;
+}

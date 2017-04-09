@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/data/jpa
+           http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+
+    <!-- 声明注解 -->
+    <context:annotation-config />
+    <context:component-scan base-package="com.company.service" />
+    
+    <!-- 加载properties文件 -->
+    <bean id="propertyConfigurerDB"
+        class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="order" value="1" />
+        <property name="ignoreUnresolvablePlaceholders" value="true" />
+        <property name="locations">
+            <list>
+                <!-- 这里支持多种寻址方式：classpath和file -->
+                <value>classpath:config-db.properties</value>
+            </list>
+        </property>
+    </bean>
+    
+    <!-- c3p0数据源 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+        destroy-method="close">
+        <property name="driverClass" value="${jdbc.driver}" />
+        <property name="jdbcUrl" value="${jdbc.url}" />
+        <property name="user" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+
+        <!-- 请求超时时间 -->
+        <property name="checkoutTimeout" value="30000" />
+        <!-- 每60秒检查所有连接池中的空闲连接。默认值: 0，不检查 -->
+        <property name="idleConnectionTestPeriod" value="30" />
+        <!-- 连接数据库连接池最大空闲时间 -->
+        <property name="maxIdleTime" value="30" />
+        <!-- 连接池初始化连接数 -->
+        <property name="initialPoolSize" value="5" />
+        <property name="minPoolSize" value="5" />
+        <property name="maxPoolSize" value="20" />
+        <!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。默认值: 3 -->
+        <property name="acquireIncrement" value="5" />
+    </bean>
+    
+    <!-- EntityManager -->
+    <bean id="entityManagerFactory"
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"></bean>
+        </property>
+        <property name="jpaProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.temp.use_jdbc_metadata_defaults">false</prop>
+            </props>
+        </property>
+        <property name="packagesToScan" value="com.company.entity" />
+    </bean>
+
+    <!-- 声明使用注解式事务 -->
+    <!-- <bean id="transactionManager" class="com.company.datasource.ReadWriteStatusAwareJpaTransactionManager"> 
+        <property name="entityManagerFactory" ref="entityManagerFactory" /> </bean> -->
+    <bean id="transactionManager"
+        class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    
+    <!-- 将事务管理加到标有 @Transactional 的类或者方法上 -->
+    <tx:annotation-driven transaction-manager="transactionManager" />
+
+    <!-- 自动扫描并注入Spring Data JPA -->
+    <!-- <jpa:repositories base-package="com.company.dao"
+        entity-manager-factory-ref="entityManagerFactory"
+        transaction-manager-ref="transactionManager">
+    </jpa:repositories> -->
+    
+    <jpa:repositories base-package="com.company.dao"
+        entity-manager-factory-ref="entityManagerFactory"
+        transaction-manager-ref="transactionManager" repository-impl-postfix="Impl"
+        factory-class="com.company.dao.BaseDaoFactoryBean">
+    </jpa:repositories>
+
+</beans>

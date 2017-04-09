@@ -1,0 +1,57 @@
+.top-bar-navbar {
+    background: white; height: 60px; line-height: 50px;border-bottom: 1px solid #e4e8e8;padding: 0 15px;
+}
+
+.top-bar-logo {
+    line-height: 60px;
+    color: #2e2e2e;
+    font-size: 21px;
+}
+
+.top-bar-logo-img {
+    margin: 12px 15px 0 28px;
+}
+
+.top-bar-logo-font {
+    margin-left: -18px;
+}
+
+.top-bar-link {
+    padding-right: 20px; vertical-align: text-bottom;
+}
+
+.top-bar-link:hover {
+    text-decoration: none;
+}
+
+.top-bar-home-img {
+    vertical-align: text-bottom;
+}
+
+.top-bar-span {
+    padding-left: 10px; font-family: MicrosoftYaHei; font-size: 16px; color: #757575;
+}
+
+.logo_div {
+    width: 50px; height: 50px; text-align: center;
+}
+
+.logo_img {
+    padding-top: 4px;
+}
+
+.logo_text {
+    padding-left: 10px; color: white; text-align: center; height: 50px; line-height: 50px; font-size: 18px;
+}
+
+.logo_text_right {
+    padding-right: 20px;
+}
+
+.main-top-bar-span {
+    padding-left: 3px; font-size: 16px;
+}
+
+.main-top-bar-warn-img {
+    padding-left: 6px;
+}
